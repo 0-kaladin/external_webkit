@@ -2,6 +2,7 @@
  * Copyright (C) 2011, 2012, Sony Ericsson Mobile Communications AB
  * Copyright (C) 2012 Sony Mobile Communications AB
  * All rights reserved.
+ * Copyright (c) 2013 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -140,6 +141,7 @@ private:
 #define CANVAS_MAX_HEIGHT   1280
 
 bool GraphicsContext3DInternal::s_loggingEnabled = false;
+short GraphicsContext3DInternal::s_numActiveContexts = 0;
 
 EGLint GraphicsContext3DInternal::checkEGLError(const char* s)
 {
@@ -198,6 +200,7 @@ GraphicsContext3DInternal::GraphicsContext3DInternal(HTMLCanvasElement* canvas,
     for (int i = 0; i < NUM_BUFFERS; i++) {
         m_fbo[i] = NULL;
     }
+    ++s_numActiveContexts;
 
     LOGWEBGL("GraphicsContext3DInternal() = %p, m_compositingLayer = %p", this, m_compositingLayer);
     m_proxy->setGraphicsContext(this);
@@ -220,6 +223,11 @@ GraphicsContext3DInternal::GraphicsContext3DInternal(HTMLCanvasElement* canvas,
 
     if (!initEGL())
         return;
+
+    if (s_numActiveContexts > ACTIVE_CONTEXTS_GC_THRESHOLD) {
+        LOGWEBGL("Perform JS garbage collection after %d contexts created.", s_numActiveContexts);
+        m_canvas->document()->frame()->script()->lowMemoryNotification();
+    }
 
     if (!createContext(true)) {
         LOGWEBGL("Create context failed. Perform JS garbage collection and try again.");
@@ -286,6 +294,7 @@ GraphicsContext3DInternal::~GraphicsContext3DInternal()
     SkSafeUnref(m_compositingLayer);
     m_compositingLayer = 0;
     deleteContext(true);
+    --s_numActiveContexts;
 
     JNIEnv* env = JSC::Bindings::getJNIEnv();
     env->DeleteGlobalRef(m_webView);

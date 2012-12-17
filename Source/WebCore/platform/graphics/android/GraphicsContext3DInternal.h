@@ -2,6 +2,7 @@
  * Copyright (C) 2011, 2012, Sony Ericsson Mobile Communications AB
  * Copyright (C) 2012, Sony Mobile Communications AB
  * All rights reserved.
+ * Copyright (c) 2013 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -144,6 +145,9 @@ public:
     static bool s_loggingEnabled;
 
 private:
+    static const short ACTIVE_CONTEXTS_GC_THRESHOLD = 10;
+    static short s_numActiveContexts;
+
     bool initEGL();
     bool createContext(bool createEGLContext);
     void deleteContext(bool deleteEGLContext);
