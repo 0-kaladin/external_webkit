@@ -41,6 +41,10 @@ FEATURE_DEFINES += ENABLE_WEB_SOCKETS=1
 # The defines above should be identical to those for JSC.
 FEATURE_DEFINES += V8_BINDING
 
+ifeq ($(DYNAMIC_SHARED_LIBV8SO), true)
+FEATURE_DEFINES += ENABLE_WORKERS=1 ENABLE_SHARED_WORKERS=1
+endif
+
 ifeq ($(ENABLE_SVG), true)
     FEATURE_DEFINES += ENABLE_SVG=1
 endif
