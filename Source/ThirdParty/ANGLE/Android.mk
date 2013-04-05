@@ -30,51 +30,71 @@ LOCAL_CFLAGS += -fno-strict-aliasing
 
 # Compiler src
 LOCAL_SRC_FILES := \
-    BuiltInFunctionEmulator.cpp \
-    Compiler.cpp \
-    DetectRecursion.cpp \
-    ForLoopUnroll.cpp \
-    InfoSink.cpp \
-    Initialize.cpp \
-    InitializeDll.cpp \
-    IntermTraverse.cpp \
-    Intermediate.cpp \
-    MapLongVariableNames.cpp \
-    ParseHelper.cpp \
-    PoolAlloc.cpp \
-    QualifierAlive.cpp \
-    RemoveTree.cpp \
-    ShaderLang.cpp \
-    SymbolTable.cpp \
-    ValidateLimitations.cpp \
-    VariableInfo.cpp \
-    debug.cpp \
-    intermOut.cpp \
-    ossource_posix.cpp \
-    parseConst.cpp \
-    util.cpp
+    src/compiler/BuiltInFunctionEmulator.cpp \
+    src/compiler/Compiler.cpp \
+    src/compiler/DetectDiscontinuity.cpp \
+    src/compiler/DetectRecursion.cpp \
+    src/compiler/Diagnostics.cpp \
+    src/compiler/DirectiveHandler.cpp \
+    src/compiler/ForLoopUnroll.cpp \
+    src/compiler/InfoSink.cpp \
+    src/compiler/Initialize.cpp \
+    src/compiler/InitializeDll.cpp \
+    src/compiler/InitializeParseContext.cpp \
+    src/compiler/IntermTraverse.cpp \
+    src/compiler/Intermediate.cpp \
+    src/compiler/MapLongVariableNames.cpp \
+    src/compiler/ParseHelper.cpp \
+    src/compiler/PoolAlloc.cpp \
+    src/compiler/QualifierAlive.cpp \
+    src/compiler/RemoveTree.cpp \
+    src/compiler/ShaderLang.cpp \
+    src/compiler/SymbolTable.cpp \
+    src/compiler/ValidateLimitations.cpp \
+    src/compiler/VariableInfo.cpp \
+    src/compiler/VariablePacker.cpp \
+    src/compiler/debug.cpp \
+    src/compiler/intermOut.cpp \
+    src/compiler/ossource_posix.cpp \
+    src/compiler/parseConst.cpp \
+    src/compiler/util.cpp \
+    src/compiler/timing/RestrictFragmentShaderTiming.cpp \
+    src/compiler/timing/RestrictVertexShaderTiming.cpp \
+    src/compiler/depgraph/DependencyGraph.cpp \
+    src/compiler/depgraph/DependencyGraphBuilder.cpp \
+    src/compiler/depgraph/DependencyGraphOutput.cpp \
+    src/compiler/depgraph/DependencyGraphTraverse.cpp
 
 # Code generator
 LOCAL_SRC_FILES := $(LOCAL_SRC_FILES) \
-    CodeGenGLSL.cpp \
-    OutputESSL.cpp \
-    OutputGLSL.cpp \
-    OutputGLSLBase.cpp \
-    TranslatorESSL.cpp \
-    TranslatorGLSL.cpp \
-    VersionGLSL.cpp \
+    src/compiler/CodeGenGLSL.cpp \
+    src/compiler/OutputESSL.cpp \
+    src/compiler/OutputGLSL.cpp \
+    src/compiler/OutputGLSLBase.cpp \
+    src/compiler/TranslatorESSL.cpp \
+    src/compiler/TranslatorGLSL.cpp \
+    src/compiler/VersionGLSL.cpp \
 
 # Generated files
 LOCAL_SRC_FILES := $(LOCAL_SRC_FILES) \
-    glslang_lex.cpp \
-    glslang_tab.cpp
+    src/compiler/glslang_lex.cpp \
+    src/compiler/glslang_tab.cpp
 
 # Preprocessor
 LOCAL_SRC_FILES := $(LOCAL_SRC_FILES) \
-    preprocessor/atom.c \
-    preprocessor/cpp.c \
-    preprocessor/cppstruct.c \
-    preprocessor/memory.c \
-    preprocessor/scanner.c \
-    preprocessor/symbols.c \
-    preprocessor/tokens.c
+    src/compiler/preprocessor/DiagnosticsBase.cpp \
+    src/compiler/preprocessor/DirectiveHandlerBase.cpp \
+    src/compiler/preprocessor/DirectiveParser.cpp \
+    src/compiler/preprocessor/ExpressionParser.cpp \
+    src/compiler/preprocessor/Input.cpp \
+    src/compiler/preprocessor/Lexer.cpp \
+    src/compiler/preprocessor/Macro.cpp \
+    src/compiler/preprocessor/MacroExpander.cpp \
+    src/compiler/preprocessor/Preprocessor.cpp \
+    src/compiler/preprocessor/Token.cpp \
+    src/compiler/preprocessor/Tokenizer.cpp
+
+# 3rd party
+LOCAL_SRC_FILES := $(LOCAL_SRC_FILES) \
+    src/third_party/compiler/ArrayBoundsClamper.cpp
+

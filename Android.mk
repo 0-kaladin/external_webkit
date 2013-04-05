@@ -220,7 +220,7 @@ LOCAL_CFLAGS += -DWEBKIT_IMPLEMENTATION=1
 
 # Needed for ANGLE
 LOCAL_C_INCLUDES := $(LOCAL_C_INCLUDES) \
-	$(SOURCE_PATH)/ThirdParty/ANGLE/include/GLSLANG
+	external/angle/include/GLSLANG
 
 ifeq ($(ENABLE_WEBAUDIO),true)
 LOCAL_C_INCLUDES := $(LOCAL_C_INCLUDES) \
@@ -428,11 +428,11 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libangle
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 LOCAL_MODULE_TAGS := optional
-ANGLE_PATH := $(SOURCE_PATH)/ThirdParty/ANGLE
+ANGLE_PATH := external/angle
 LOCAL_SHARED_LIBRARIES := $(WEBKIT_SHARED_LIBRARIES)
-include $(ANGLE_PATH)/Android.mk
+include $(SOURCE_PATH)/ThirdParty/ANGLE/Android.mk
 # Redefine LOCAL_SRC_FILES with the correct prefix
-LOCAL_SRC_FILES := $(addprefix Source/ThirdParty/ANGLE/src/compiler/,$(LOCAL_SRC_FILES))
+LOCAL_SRC_FILES := $(addprefix ../angle/,$(LOCAL_SRC_FILES))
 # Append angle intermediate include paths to the WebKit include list.
 LOCAL_C_INCLUDES := $(WEBKIT_C_INCLUDES) \
 	$(ANGLE_PATH)/include \
