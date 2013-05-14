@@ -32,7 +32,6 @@
 #define DOMData_h
 
 #include "DOMDataStore.h"
-#include "StaticDOMDataStore.h"
 #include "V8DOMWrapper.h"
 
 namespace WebCore {
@@ -47,6 +46,12 @@ namespace WebCore {
     class DOMData {
         WTF_MAKE_NONCOPYABLE(DOMData);
     public:
+        DOMData();
+        virtual ~DOMData();
+
+        static DOMData* getCurrent();
+        virtual DOMDataStore& getStore() = 0;
+
         template<typename T>
         static void handleWeakObject(DOMDataStore::DOMWrapperMapType, v8::Persistent<v8::Object>, T* domObject);
 
@@ -55,9 +60,7 @@ namespace WebCore {
 
         ThreadIdentifier owningThread() const { return m_owningThread; }
 
-        static DOMDataStore& getCurrentStore();
     private:
-        DOMData();
         static void derefObject(WrapperTypeInfo* type, void* domObject);
 
         template<typename T>

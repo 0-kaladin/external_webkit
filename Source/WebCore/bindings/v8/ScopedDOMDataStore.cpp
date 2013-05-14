@@ -33,8 +33,8 @@
 
 namespace WebCore {
 
-ScopedDOMDataStore::ScopedDOMDataStore()
-    : DOMDataStore()
+ScopedDOMDataStore::ScopedDOMDataStore(DOMData* domData)
+    : DOMDataStore(domData)
 {
     m_domNodeMap = new DOMWrapperMap<Node>(&DOMDataStore::weakNodeCallback);
     m_domObjectMap = new DOMWrapperMap<void>(&DOMDataStore::weakDOMObjectCallback);

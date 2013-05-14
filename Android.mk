@@ -266,11 +266,6 @@ LOCAL_PATH := $(BASE_PATH)
 
 # Define our compiler flags
 LOCAL_CFLAGS += -Wno-endif-labels -Wno-import -Wno-format -Wno-error=strict-aliasing
-ifeq ($(DYNAMIC_SHARED_LIBV8SO), true)
-LOCAL_CFLAGS += -DENABLE_WORKERS=1
-LOCAL_CFLAGS += -DENABLE_SHARED_WORKERS=1
-endif
-LOCAL_CFLAGS += -DENABLE_CHANNEL_MESSAGING=1
 LOCAL_CFLAGS += -fno-strict-aliasing
 LOCAL_CFLAGS += -include "WebCorePrefix.h"
 LOCAL_CFLAGS += -fvisibility=hidden

@@ -46,8 +46,7 @@ namespace WebCore {
 //
 class StaticDOMDataStore : public DOMDataStore {
 public:
-    StaticDOMDataStore();
-    virtual ~StaticDOMDataStore();
+    StaticDOMDataStore(DOMData*);
 
 private:
     IntrusiveDOMWrapperMap m_staticDomNodeMap;
@@ -61,3 +60,4 @@ private:
 } // namespace WebCore
 
 #endif // StaticDOMDataStore_h
+
