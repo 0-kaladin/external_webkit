@@ -71,7 +71,7 @@ PassOwnPtr<AudioBus> AudioBus::loadPlatformResource(const char* name, float samp
     const char * str = webaudio::webAudioAssetFileName(name);
     if (!str) {
         WEBAUDIO_LOGW("AudioBus::loadPlatformResource : error webaudio::webAudioAssetFileName() - name: %s", name);
-        return 0;
+        return nullptr;
     }
 
     android::AssetManager* am = webAudioAssetManager();
@@ -80,7 +80,7 @@ PassOwnPtr<AudioBus> AudioBus::loadPlatformResource(const char* name, float samp
         asset = am->openNonAsset(str, android::Asset::ACCESS_BUFFER);
         if (!asset) {
             WEBAUDIO_LOGW("AudioBus::loadPlatformResource : asset not found - name: %s", str);
-            return 0;
+            return nullptr;
         }
     }
 
@@ -88,7 +88,7 @@ PassOwnPtr<AudioBus> AudioBus::loadPlatformResource(const char* name, float samp
     delete asset;
     if (!audioBus.get()) {
         WEBAUDIO_LOGW("AudioBus::loadPlatformResource : audio file decode error - name: %s", str);
-        return 0;
+        return nullptr;
     }
     WEBAUDIO_LOGW("AudioBus::loadPlatformResource : decoded AudioBus - channels: %d, length: %d, sampleRate: %f",
         audioBus->numberOfChannels(), audioBus->length(), audioBus->sampleRate());
@@ -107,7 +107,7 @@ PassOwnPtr<AudioBus> createBusFromInMemoryAudioFile(const void* data, size_t dat
     OwnPtr<AudioBus> audioBus = webaudio::decodeAudioFileData(static_cast<const char*>(data), dataSize, sampleRate);
     if (!audioBus.get()) {
         WEBAUDIO_LOGW("AudioBus::createBusFromInMemoryAudioFile : audio file decode error - dataSize", dataSize);
-        return 0;
+        return nullptr;
     }
 
     WEBAUDIO_LOGD("createBusFromInMemoryAudioFile : decoded AudioBus - channels: %d, length: %d, sampleRate: %f",

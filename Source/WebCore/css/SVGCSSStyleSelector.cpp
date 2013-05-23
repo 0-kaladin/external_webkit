@@ -545,7 +545,7 @@ void CSSStyleSelector::applySVGProperty(int id, CSSValue* value)
             if (isInherit)
                 return svgstyle->setShadow(m_parentStyle->svgStyle()->shadow() ? new ShadowData(*m_parentStyle->svgStyle()->shadow()) : 0);
             if (isInitial || primitiveValue) // initial | none
-                return svgstyle->setShadow(0);
+                return svgstyle->setShadow(nullptr);
 
             if (!value->isValueList())
                 return;

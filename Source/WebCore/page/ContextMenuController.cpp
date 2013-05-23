@@ -123,7 +123,7 @@ void ContextMenuController::showContextMenu(Event* event, PassRefPtr<ContextMenu
 PassOwnPtr<ContextMenu> ContextMenuController::createContextMenu(Event* event)
 {
     if (!event->isMouseEvent())
-        return 0;
+        return nullptr;
 
     MouseEvent* mouseEvent = static_cast<MouseEvent*>(event);
     HitTestResult result(mouseEvent->absoluteLocation());
@@ -132,7 +132,7 @@ PassOwnPtr<ContextMenu> ContextMenuController::createContextMenu(Event* event)
         result = frame->eventHandler()->hitTestResultAtPoint(mouseEvent->absoluteLocation(), false);
 
     if (!result.innerNonSharedNode())
-        return 0;
+        return nullptr;
 
     m_hitTestResult = result;
 

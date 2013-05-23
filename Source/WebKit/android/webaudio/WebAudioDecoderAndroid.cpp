@@ -283,6 +283,6 @@ WTF::PassOwnPtr<WebCore::AudioBus> webaudio::decodeAudioFileData(const char* dat
         OwnPtr<WebCore::AudioBus> audioBusPtr(adoptPtr(audioBus));
         return audioBusPtr.release();
     }
-    return 0;
+    return nullptr;
 }
 

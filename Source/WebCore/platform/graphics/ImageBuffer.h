@@ -68,9 +68,9 @@ namespace WebCore {
         {
             bool success = false;
             OwnPtr<ImageBuffer> buf(new ImageBuffer(size, colorSpace, renderingMode, success));
-            if (success)
-                return buf.release();
-            return 0;
+            if (!success)
+                return nullptr;
+            return buf.release();
         }
 
         ~ImageBuffer();

@@ -203,7 +203,7 @@ MessagePort* MessagePort::locallyEntangledPort()
 PassOwnPtr<MessagePortChannelArray> MessagePort::disentanglePorts(const MessagePortArray* ports, ExceptionCode& ec)
 {
     if (!ports || !ports->size())
-        return 0;
+        return nullptr;
 
     // HashSet used to efficiently check for duplicates in the passed-in array.
     HashSet<MessagePort*> portSet;
@@ -213,7 +213,7 @@ PassOwnPtr<MessagePortChannelArray> MessagePort::disentanglePorts(const MessageP
         MessagePort* port = (*ports)[i].get();
         if (!port || port->isCloned() || portSet.contains(port)) {
             ec = INVALID_STATE_ERR;
-            return 0;
+            return nullptr;
         }
         portSet.add(port);
     }
@@ -231,7 +231,7 @@ PassOwnPtr<MessagePortChannelArray> MessagePort::disentanglePorts(const MessageP
 PassOwnPtr<MessagePortArray> MessagePort::entanglePorts(ScriptExecutionContext& context, PassOwnPtr<MessagePortChannelArray> channels)
 {
     if (!channels || !channels->size())
-        return 0;
+        return nullptr;
 
     MessagePortArray* portArray = new MessagePortArray(channels->size());
     for (unsigned int i = 0; i < channels->size(); ++i) {
