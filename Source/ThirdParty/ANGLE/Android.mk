@@ -25,6 +25,9 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+# Use -fno-strict-aliasing so it doesn't need to be global
+LOCAL_CFLAGS += -fno-strict-aliasing
+
 # Compiler src
 LOCAL_SRC_FILES := \
     BuiltInFunctionEmulator.cpp \
